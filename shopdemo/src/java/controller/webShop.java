@@ -68,7 +68,7 @@ public class webShop extends HttpServlet {
 		if (ses.getAttribute("reload") != null) {
 			reload = (boolean) ses.getAttribute("reload");
 		}
-		if (reload == true) {
+		if (reload == true || ses.getAttribute("allproducts") == null || ses.getAttribute("allcategories") == null || ses.getAttribute("allcollections") == null || ses.getAttribute("accountlist") == null) {
 			List<product> allproductlist = dao.getallProduct();
 			List<category> categorylist = dao.getallCategory();
 			List<collection> collectionlist = dao.getallCollection();
@@ -79,16 +79,7 @@ public class webShop extends HttpServlet {
 			ses.setAttribute("accountlist", accountlist);
 			ses.setAttribute("reload", false);
 		}
-		if (ses.getAttribute("allproducts") == null || ses.getAttribute("allcategories") == null || ses.getAttribute("allcollections") == null || ses.getAttribute("accountlist") == null) {
-			List<product> allproducts = dao.getallProduct();
-			List<category> allcategories = dao.getallCategory();
-			List<collection> collectionlist = dao.getallCollection();
-			List<account> accountlist =  dao.getallAccount();
-			ses.setAttribute("allproducts", allproducts);
-			ses.setAttribute("allcategories", allcategories);
-			ses.setAttribute("allcollections", collectionlist);
-			ses.setAttribute("accountlist", accountlist);
-		}
+		
 		List<product> allproductlist = (ArrayList<product>) ses.getAttribute("allproducts");
 		List<category> categorylist = (ArrayList<category>) ses.getAttribute("allcategories");
 //load data using session end	
